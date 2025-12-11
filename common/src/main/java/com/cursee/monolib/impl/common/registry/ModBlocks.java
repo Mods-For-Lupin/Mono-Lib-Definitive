@@ -1,4 +1,4 @@
-package com.cursee.monolib.impl.registry;
+package com.cursee.monolib.impl.common.registry;
 
 import java.util.function.BiConsumer;
 import net.minecraft.resources.Identifier;

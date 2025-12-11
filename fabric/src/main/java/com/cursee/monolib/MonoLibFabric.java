@@ -1,11 +1,12 @@
 package com.cursee.monolib;
 
-import com.cursee.monolib.impl.registry.ModBlockEntities;
-import com.cursee.monolib.impl.registry.ModBlocks;
-import com.cursee.monolib.impl.registry.ModEntities;
-import com.cursee.monolib.impl.registry.ModItems;
-import com.cursee.monolib.impl.registry.ModMenus;
-import com.cursee.monolib.impl.registry.ModTabs;
+import com.cursee.monolib.impl.common.command.ModCommands;
+import com.cursee.monolib.impl.common.registry.ModBlockEntities;
+import com.cursee.monolib.impl.common.registry.ModBlocks;
+import com.cursee.monolib.impl.common.registry.ModEntities;
+import com.cursee.monolib.impl.common.registry.ModItems;
+import com.cursee.monolib.impl.common.registry.ModMenus;
+import com.cursee.monolib.impl.common.registry.ModTabs;
 import com.mojang.brigadier.CommandDispatcher;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -42,5 +43,7 @@ public class MonoLibFabric implements ModInitializer {
     CommandRegistrationCallback.EVENT.register(MonoLibFabric::registerCommands);
   }
 
-  public static void registerCommands(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, CommandSelection commandSelection) {}
+  public static void registerCommands(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, CommandSelection commandSelection) {
+    ModCommands.register(commandDispatcher, commandBuildContext, commandSelection);
+  }
 }

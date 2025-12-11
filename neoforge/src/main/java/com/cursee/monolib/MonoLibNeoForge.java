@@ -1,11 +1,12 @@
 package com.cursee.monolib;
 
-import com.cursee.monolib.impl.registry.ModBlockEntities;
-import com.cursee.monolib.impl.registry.ModBlocks;
-import com.cursee.monolib.impl.registry.ModEntities;
-import com.cursee.monolib.impl.registry.ModItems;
-import com.cursee.monolib.impl.registry.ModMenus;
-import com.cursee.monolib.impl.registry.ModTabs;
+import com.cursee.monolib.impl.common.command.ModCommands;
+import com.cursee.monolib.impl.common.registry.ModBlockEntities;
+import com.cursee.monolib.impl.common.registry.ModBlocks;
+import com.cursee.monolib.impl.common.registry.ModEntities;
+import com.cursee.monolib.impl.common.registry.ModItems;
+import com.cursee.monolib.impl.common.registry.ModMenus;
+import com.cursee.monolib.impl.common.registry.ModTabs;
 import com.mojang.brigadier.CommandDispatcher;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -17,7 +18,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -64,5 +64,7 @@ public class MonoLibNeoForge {
     CommandDispatcher<CommandSourceStack> commandDispatcher = event.getDispatcher();
     CommandBuildContext commandBuildContext = event.getBuildContext();
     CommandSelection commandSelection = event.getCommandSelection();
+
+    ModCommands.register(commandDispatcher, commandBuildContext, commandSelection);
   }
 }
