@@ -3,6 +3,12 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
+dependencies {
+    // modImplementation include ("eu.midnightdust:midnightlib:1.9.2+1.21.11-neoforge")
+
+    jarJar(implementation("eu.midnightdust:midnightlib:1.9.2+1.21.11-neoforge"))
+}
+
 neoForge {
     version = neoforge_version
     // Automatically enable neoforge AccessTransformers if the file exists

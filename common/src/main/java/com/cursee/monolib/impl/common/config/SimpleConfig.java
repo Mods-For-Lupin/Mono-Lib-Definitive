@@ -1,6 +1,7 @@
 package com.cursee.monolib.impl.common.config;
 
 import com.cursee.monolib.MonoLib;
+import com.cursee.monolib.MonoLibConfiguration;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -45,7 +46,7 @@ public class SimpleConfig {
   /// Attempts to read the given String as a file using {@link FileReader}
   private void load(String path) throws IOException {
 
-    if (MonoLib.debugging) {
+    if (MonoLibConfiguration.debugging) {
       MonoLib.LOG.info("SimpleConfig#load called with String path {}", path);
     }
 

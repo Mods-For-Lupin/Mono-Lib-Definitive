@@ -40,6 +40,17 @@ repositories {
         name = 'BlameJared'
         url = 'https://maven.blamejared.com'
     }
+
+    // for mod menu (fabric)
+    maven {
+        name = "Terraformers"
+        url = "https://maven.terraformersmc.com/"
+    }
+
+    // for midnight lib
+    maven {
+        url = "https://maven.midnightdust.eu/releases"
+    }
 }
 
 // Declare capabilities on the outgoing configurations.

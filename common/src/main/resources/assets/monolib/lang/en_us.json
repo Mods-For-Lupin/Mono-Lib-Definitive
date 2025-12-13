@@ -1,4 +1,8 @@
 {
+  "monolib.midnightconfig.title": "MonoLib",
+  "monolib.midnightconfig.debugging": "Debugging Enabled?",
+  "monolib.midnightconfig.verifyMods": "JAR Inspection Enabled?",
+
   "commands.monolib.hand.error.not_air": "Item must not be empty or air!",
   "commands.monolib.hand.error.internal": "Error encountered while formatting text. Check logs for more info."
 }

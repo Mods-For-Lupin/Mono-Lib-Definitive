@@ -1,8 +1,6 @@
 package com.cursee.monolib.impl.common.serialization.codecs.map;
 
 import com.cursee.monolib.MonoLib;
-import com.cursee.monolib.impl.common.serialization.conditions.ILoadCondition;
-import com.cursee.monolib.impl.common.serialization.conditions.LoadConditions;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
@@ -246,9 +244,6 @@ public class MapCodecs {
   public static final MapCodecHelper<AttributeModifier> ATTRIBUTE_MODIFIER = new MapCodecHelper<>(AttributeModifier.CODEC);
   public static final MapCodecHelper<MobEffectInstance> EFFECT_INSTANCE = new MapCodecHelper<>(MobEffectInstance.CODEC);
   public static final MapCodecHelper<Vector3fc> VECTOR_3F = new MapCodecHelper<>(ExtraCodecs.VECTOR3F);
-
-  // Bookshelf Types
-  public static final MapCodecHelper<ILoadCondition> LOAD_CONDITION = LoadConditions.CODEC_HELPER;
 
   /**
    * Creates a Codec that can flexibly read individual values as a list in addition to traditional lists.

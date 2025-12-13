@@ -1,6 +1,7 @@
 package com.cursee.monolib.impl.common.command;
 
 import com.cursee.monolib.MonoLib;
+import com.cursee.monolib.MonoLibConfiguration;
 import com.cursee.monolib.impl.common.command.data.MonoLibDataCommand;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandBuildContext;
@@ -13,13 +14,13 @@ public class ModCommands {
 
   public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, CommandSelection commandSelection) {
 
-    if (MonoLib.debugging) {
+    if (MonoLibConfiguration.debugging) {
       MonoLib.LOG.info("Registering MonoLib commands...");
     }
 
     MonoLibDataCommand.register(commandDispatcher);
 
-    if (MonoLib.debugging) {
+    if (MonoLibConfiguration.debugging) {
       MonoLib.LOG.info("Registered all MonoLib commands.");
     }
   }

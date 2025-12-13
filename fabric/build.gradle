@@ -10,6 +10,9 @@ dependencies {
     }
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+
+    modImplementation("com.terraformersmc:modmenu:17.0.0-alpha.1")
+    modImplementation include ("eu.midnightdust:midnightlib:1.9.2+1.21.11-fabric")
 }
 
 loom {
