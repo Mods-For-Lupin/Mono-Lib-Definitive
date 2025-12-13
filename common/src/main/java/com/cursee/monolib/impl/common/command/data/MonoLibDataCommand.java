@@ -1,6 +1,7 @@
 package com.cursee.monolib.impl.common.command.data;
 
 import com.cursee.monolib.Constants;
+import com.cursee.monolib.MonoLib;
 import com.cursee.monolib.impl.common.command.ModCommands;
 import com.cursee.monolib.impl.common.command.data.arg.FormatArgument;
 import com.cursee.monolib.impl.common.command.data.arg.SlotArgument;
@@ -26,6 +27,10 @@ public class MonoLibDataCommand {
   private static final String FORMAT = "format";
 
   public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+
+    if (MonoLib.debugging) {
+      MonoLib.LOG.info("Registering \"/monolib data <slot> <format>\" command...");
+    }
 
     var monolib = Commands.literal(Constants.MOD_ID);
     var data = monolib.then(Commands.literal(DATA));

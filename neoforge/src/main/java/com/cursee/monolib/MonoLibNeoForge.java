@@ -22,6 +22,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLModContainer;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +46,7 @@ public class MonoLibNeoForge {
 
     MonoLib.init();
 
-    eventBus.addListener(MonoLibNeoForge::registerCommands);
+    NeoForge.EVENT_BUS.addListener(MonoLibNeoForge::registerCommands);
 
     if (dist == Dist.CLIENT) {
       new MonoLibClientNeoForge();
