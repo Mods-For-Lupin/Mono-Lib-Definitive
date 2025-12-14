@@ -12,10 +12,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.suggestion.Suggestions;
+import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.StringJoiner;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiFunction;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -81,6 +85,11 @@ public enum FormatArgument implements IEnumCommandArg {
 
       return Component.literal(gson.toJson(json)).withStyle(style -> style.withClickEvent(new ClickEvent.CopyToClipboard(gson.toJson(json))));
     };
+  }
+
+  public static CompletableFuture<Suggestions> suggestion(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) {
+    Arrays.stream(FormatArgument.values()).forEach(format -> builder.suggest(format.getCommandName()));
+    return builder.buildFuture();
   }
 
   @Override

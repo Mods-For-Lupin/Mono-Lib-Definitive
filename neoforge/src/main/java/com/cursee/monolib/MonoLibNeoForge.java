@@ -7,6 +7,7 @@ import com.cursee.monolib.impl.common.registry.ModEntities;
 import com.cursee.monolib.impl.common.registry.ModItems;
 import com.cursee.monolib.impl.common.registry.ModMenus;
 import com.cursee.monolib.impl.common.registry.ModTabs;
+import com.cursee.monolib.impl.common.sailing.SailingServer;
 import com.mojang.brigadier.CommandDispatcher;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -18,12 +19,15 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLModContainer;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.server.ServerLifecycleEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,6 +52,11 @@ public class MonoLibNeoForge {
 
     NeoForge.EVENT_BUS.addListener(MonoLibNeoForge::registerCommands);
 
+    NeoForge.EVENT_BUS.addListener((Consumer<ServerStartedEvent>) event -> {
+      SailingServer.onServerStarted(event.getServer());
+    });
+
+    // client init
     if (dist == Dist.CLIENT) {
       new MonoLibClientNeoForge();
     }

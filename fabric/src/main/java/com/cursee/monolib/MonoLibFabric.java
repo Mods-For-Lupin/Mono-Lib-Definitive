@@ -7,11 +7,13 @@ import com.cursee.monolib.impl.common.registry.ModEntities;
 import com.cursee.monolib.impl.common.registry.ModItems;
 import com.cursee.monolib.impl.common.registry.ModMenus;
 import com.cursee.monolib.impl.common.registry.ModTabs;
+import com.cursee.monolib.impl.common.sailing.SailingServer;
 import com.mojang.brigadier.CommandDispatcher;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands.CommandSelection;
@@ -41,6 +43,10 @@ public class MonoLibFabric implements ModInitializer {
     MonoLib.init();
 
     CommandRegistrationCallback.EVENT.register(MonoLibFabric::registerCommands);
+
+    ServerLifecycleEvents.SERVER_STARTED.register(SailingServer::onServerStarted);
+
+    // client init
   }
 
   public static void registerCommands(CommandDispatcher<CommandSourceStack> commandDispatcher, CommandBuildContext commandBuildContext, CommandSelection commandSelection) {

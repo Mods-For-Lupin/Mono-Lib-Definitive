@@ -10,7 +10,6 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import java.util.Arrays;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -33,22 +32,24 @@ public class MonoLibDataCommand {
       MonoLib.LOG.info("Registering \"/monolib data <slot> <format>\" command...");
     }
 
-    var monolib = Commands.literal(Constants.MOD_ID);
-    var data = monolib.then(Commands.literal(DATA));
+    // ugly, but intuitive; construct the command in order of its arguments
+//    var monolibData =
+//        Commands.literal(Constants.MOD_ID)
+//        .then(Commands.literal(DATA)
+//            .then(Commands.argument(SLOT, StringArgumentType.word()).suggests(SlotArgument::suggestion)
+//                .then(Commands.argument(FORMAT, StringArgumentType.word()).suggests(FormatArgument::suggestion)
+//                    .executes(MonoLibDataCommand::execute))));
+//
+//    dispatcher.register(monolibData);
 
-    var slotArg = Commands.argument(SLOT, StringArgumentType.word()).suggests((context, builder) -> {
-      Arrays.stream(SlotArgument.values()).forEach(slot -> builder.suggest(slot.getCommandName()));
-      return builder.buildFuture();
-    });
+    // unintuitive but cleaner; constructs the command in reverse from terminating point to root node
+    var formatExecution = Commands.argument(FORMAT, StringArgumentType.word()).suggests(FormatArgument::suggestion).executes(MonoLibDataCommand::execute);
+    var slotArgWithFormat = Commands.argument(SLOT, StringArgumentType.word()).suggests(SlotArgument::suggestion).then(formatExecution);
+    var dataSubWithArgs = Commands.literal(DATA).then(slotArgWithFormat);
+    var monolibComWithDataSub = Commands.literal(Constants.MOD_ID).then(dataSubWithArgs);
 
-    var formatArg = Commands.argument(FORMAT, StringArgumentType.word()).suggests((context, builder) -> {
-      Arrays.stream(FormatArgument.values()).forEach(format -> builder.suggest(format.getCommandName()));
-      return builder.buildFuture();
-    });
-
-    var withArgs = data.then(slotArg.then(formatArg.executes(MonoLibDataCommand::execute)));
-
-    dispatcher.register(withArgs);
+    // registers our full data sub-command under /monolib
+    dispatcher.register(monolibComWithDataSub);
   }
 
   public static int execute(CommandContext<CommandSourceStack> context) {
