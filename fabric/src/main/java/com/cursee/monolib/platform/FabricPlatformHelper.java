@@ -3,6 +3,7 @@ package com.cursee.monolib.platform;
 import com.cursee.monolib.platform.services.IPlatformHelper;
 import java.nio.file.Path;
 import java.util.function.BiFunction;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.loader.api.FabricLoader;
@@ -70,5 +71,10 @@ public class FabricPlatformHelper implements IPlatformHelper {
   public Builder createCreativeTabBuilder() {
 
     return FabricItemGroup.builder();
+  }
+
+  @Override
+  public boolean isClientSide() {
+    return FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT;
   }
 }

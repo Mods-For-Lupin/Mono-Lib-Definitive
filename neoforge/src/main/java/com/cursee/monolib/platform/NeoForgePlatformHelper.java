@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 
@@ -70,5 +71,10 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
   public Builder createCreativeTabBuilder() {
 
     return CreativeModeTab.builder();
+  }
+
+  @Override
+  public boolean isClientSide() {
+    return FMLLoader.getCurrent().getDist() == Dist.CLIENT;
   }
 }

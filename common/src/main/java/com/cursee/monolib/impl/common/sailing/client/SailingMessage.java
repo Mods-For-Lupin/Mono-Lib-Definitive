@@ -1,4 +1,4 @@
-package com.cursee.monolib.impl.common.sailing;
+package com.cursee.monolib.impl.common.sailing.client;
 
 import java.net.URI;
 import net.minecraft.ChatFormatting;
@@ -10,8 +10,7 @@ import net.minecraft.world.entity.player.Player;
 
 public class SailingMessage {
 
-  public static void sendMessage(Player player, String message, ChatFormatting colour,
-      boolean insertNewLineBeforeMessage, String url) {
+  public static void sendMessage(Player player, String message, ChatFormatting colour, boolean insertNewLineBeforeMessage, String url) {
 
     if (message.isEmpty()) {
       return;
@@ -35,8 +34,7 @@ public class SailingMessage {
 
       if (url != null && !url.isEmpty()) {
         try {
-          Style clickstyle = mutableMessage.getStyle()
-              .withClickEvent(new ClickEvent.OpenUrl(new URI(url)));
+          Style clickstyle = mutableMessage.getStyle().withClickEvent(new ClickEvent.OpenUrl(new URI(url)));
           mutableMessage.withStyle(clickstyle);
         } catch (Exception ignored) {
         }

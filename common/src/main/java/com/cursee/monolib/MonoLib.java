@@ -26,9 +26,9 @@ public class MonoLib {
 
     // disable warden inspection base on config
     if (MonoLibConfiguration.verifyMods) {
-      LOG.info("MonoLib's common config value 'verifyMods' is set to 'true'. If you are on Windows, MonoLib will inspect your JAR files using ZoneIdentifier lookups.");
+      LOG.info("MonoLib's common config value 'verifyMods' is set to 'true'. On Windows, MonoLib will inspect JAR files in the 'mods' folder using ZoneIdentifier lookups.");
       LOG.info("This is a non-invasive process and does not modify any of your files; it is simply a warning in case you downloaded a potentially unsafe file.");
-      LOG.info("The JAR inspect will occur now. Check out https://stopmodreposts.org/ for more info on why this feature exists.");
+      LOG.info("The JAR inspection will occur now (only on Windows). Check out https://stopmodreposts.org/ for more info on why this feature exists.");
       SailingWarden.process(Services.PLATFORM.getGameDirectoryString() + File.separator + "mods");
     }
 

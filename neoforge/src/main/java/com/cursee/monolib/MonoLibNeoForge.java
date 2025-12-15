@@ -8,9 +8,12 @@ import com.cursee.monolib.impl.common.registry.ModItems;
 import com.cursee.monolib.impl.common.registry.ModMenus;
 import com.cursee.monolib.impl.common.registry.ModTabs;
 import com.cursee.monolib.impl.common.sailing.SailingServer;
+import com.cursee.monolib.impl.common.sailing.client.SailingClient;
 import com.mojang.brigadier.CommandDispatcher;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands.CommandSelection;
@@ -18,6 +21,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.IEventBus;
@@ -26,6 +30,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLModContainer;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.server.ServerLifecycleEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
@@ -54,6 +59,12 @@ public class MonoLibNeoForge {
 
     NeoForge.EVENT_BUS.addListener((Consumer<ServerStartedEvent>) event -> {
       SailingServer.onServerStarted(event.getServer());
+    });
+
+    NeoForge.EVENT_BUS.addListener((Consumer<EntityJoinLevelEvent>) event -> {
+      if (event.getEntity() instanceof Player player && event.getLevel().getServer() instanceof IntegratedServer integrated && !integrated.isDedicatedServer()) {
+        SailingClient.onPlayerJoinLevel(player);
+      }
     });
 
     // client init

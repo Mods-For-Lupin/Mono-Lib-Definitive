@@ -69,4 +69,6 @@ public interface IPlatformHelper {
   <T extends AbstractContainerMenu> MenuType<T> createMenuType(BiFunction<Integer, Inventory, T> constructor, FeatureFlagSet requiredFeatures);
 
   CreativeModeTab.Builder createCreativeTabBuilder();
+
+  boolean isClientSide();
 }
