@@ -18,7 +18,7 @@ public class MonoLib {
     LOG.info("Common mod initialization occurring. MidnightLib by Motschen/TeamMidnightDust is Jar-in-Jarred for configuration and may appear in your mod menu.");
 
     // initialize our config first before attempting verification
-    MidnightConfig.init("monolib", MonoLibConfiguration.class);
+    MidnightConfig.init(Constants.MOD_ID, MonoLibConfiguration.class);
 
     if (MonoLibConfiguration.debugging) {
       LOG.info("Debugging logs enabled.");
@@ -34,7 +34,7 @@ public class MonoLib {
 
     // register our mod to our Sailing API
     Sailing.register(Constants.MOD_ID, Constants.MOD_NAME, Constants.MOD_VERSION, Constants.MOD_PUBLISHER, Constants.MOD_URL);
-    Sailing.register("non_existent_mod", "Non-Existent", "90.0.1", "Genghis", "https://www.youtube.com/@jason13gaming");
+    // Sailing.register("non_existent_mod", "Non-Existent", "90.0.1", "Genghis", "https://www.youtube.com/@jason13gaming"); // testing
   }
 
   public static Identifier identifier(String path) {
